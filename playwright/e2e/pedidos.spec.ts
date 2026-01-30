@@ -4,6 +4,9 @@ test('deve consultar um pedido aprovado', async ({ page }) => {
   
     ///AAA - Arrange, Act, Assert - Arrange: Preparar o teste, Act: Executar o teste, Assert: Verificar o resultado
 
+  // Test Data
+  const order = 'VLO-UG7N2V'
+
   // Arrange
   await page.goto('http://localhost:5173/')
   await expect(page.getByTestId('hero-section').getByRole('heading')).toContainText('Velô Sprint')
@@ -13,7 +16,7 @@ test('deve consultar um pedido aprovado', async ({ page }) => {
 
   // Act
   
-  await page.getByRole('textbox', { name: 'Número do Pedido' }).fill('VLO-UG7N2V')
+  await page.getByRole('textbox', { name: 'Número do Pedido' }).fill(order)
   await page.getByRole('button', { name: 'Buscar Pedido' }).click({timeout: 10_000})
 
   // Assert
@@ -22,7 +25,7 @@ test('deve consultar um pedido aprovado', async ({ page }) => {
      .filter({hasText: /^Pedido$/})
      .locator('..') // Sobe para o elemento pai (a div que agrupa ambos) 
 
-  await expect(containerPedido).toContainText('VLO-UG7N2V', {timeout: 10_000})
+  await expect(containerPedido).toContainText(order, {timeout: 10_000})
 
   await expect(page.getByText('APROVADO')).toBeVisible()
 
