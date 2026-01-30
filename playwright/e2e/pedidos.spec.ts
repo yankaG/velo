@@ -18,11 +18,12 @@ test('deve consultar um pedido aprovado', async ({ page }) => {
 
   // Assert
 
-  await expect(page.getByText('VLO-UG7N2V')).toBeVisible({timeout: 10_000})
-  await expect(page.getByText('VLO-UG7N2V')).toContainText('VLO-UG7N2V')
-  //await expect(page.getByTestId('order-result-VLO-UG7N2V')).toContainText('VLO-UG7N2V')
+  const containerPedido = page.getByRole('paragraph')
+     .filter({hasText: /^Pedido$/})
+     .locator('..') // Sobe para o elemento pai (a div que agrupa ambos) 
+
+  await expect(containerPedido).toContainText('VLO-UG7N2V', {timeout: 10_000})
 
   await expect(page.getByText('APROVADO')).toBeVisible()
-  await expect(page.getByText('APROVADO')).toContainText('APROVADO')
-  //await expect(page.getByTestId('order-result-VLO-UG7N2V')).toContainText('APROVADO')
+
 })
