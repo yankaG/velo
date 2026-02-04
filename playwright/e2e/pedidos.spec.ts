@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test'
 
+///AAA - Arrange, Act, Assert - Arrange: Preparar o teste, Act: Executar o teste, Assert: Verificar o resultado
+
+import { gerarCodigoPedido } from '../support/helpers'
+
 test('deve consultar um pedido aprovado', async ({ page }) => {
-  
-    ///AAA - Arrange, Act, Assert - Arrange: Preparar o teste, Act: Executar o teste, Assert: Verificar o resultado
 
   // Test Data
   const order = 'VLO-UG7N2V'
@@ -33,7 +35,7 @@ test('deve consultar um pedido aprovado', async ({ page }) => {
 
 test('deve exibir mensagem quando o pedido não é encontrado', async ({page})=> {
 
-  const order = 'VLO-ABC123'
+  const order = gerarCodigoPedido()
 
   await page.goto('http://localhost:5173/')
   await expect(page.getByTestId('hero-section').getByRole('heading')).toContainText('Velô Sprint')
