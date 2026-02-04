@@ -27,7 +27,7 @@ test.describe('Consulta de Pedido', ()=> {
 
   // Assert
 
-    await expect(page.getByTestId('order-result-${order}')).toMatchAriaSnapshot(`
+    await expect(page.getByTestId(`order-result-${order}`)).toMatchAriaSnapshot(`
       - img
       - paragraph: Pedido
       - paragraph: ${order}
