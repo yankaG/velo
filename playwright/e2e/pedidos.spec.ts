@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test'
 
 import { gerarCodigoPedido } from '../support/helpers'
 
+import { OrderLockupPage } from '../support/pages/OrderLockupPage'
+
 ///AAA - Arrange, Act, Assert - Arrange: Preparar o teste, Act: Executar o teste, Assert: Verificar o resultado
 
 test.describe('Consulta de Pedido', ()=> {
@@ -34,8 +36,9 @@ test.describe('Consulta de Pedido', ()=> {
 
   // Act
   
-    await page.getByRole('textbox', { name: 'Número do Pedido' }).fill(order.number)
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click({timeout: 10_000})
+    const orderLockupPage = new OrderLockupPage(page)
+
+    await orderLockupPage.searchOrder(order.number)
 
   // Assert
 
@@ -95,8 +98,9 @@ test.describe('Consulta de Pedido', ()=> {
     }
     // Act
     
-    await page.getByRole('textbox', { name: 'Número do Pedido' }).fill(order.number)
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click({timeout: 10_000})
+    const orderLockupPage = new OrderLockupPage(page)
+    
+    await orderLockupPage.searchOrder(order.number)
   
     // Assert
   
@@ -156,8 +160,9 @@ test.describe('Consulta de Pedido', ()=> {
     }
     // Act
     
-    await page.getByRole('textbox', { name: 'Número do Pedido' }).fill(order.number)
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click({timeout: 10_000})
+    const orderLockupPage = new OrderLockupPage(page)
+    
+    await orderLockupPage.searchOrder(order.number)
   
     // Assert
   
@@ -204,8 +209,9 @@ test.describe('Consulta de Pedido', ()=> {
 
     const order = gerarCodigoPedido()
 
-    await page.getByRole('textbox', { name: 'Número do Pedido' }).fill(order)
-    await page.getByRole('button', { name: 'Buscar Pedido' }).click({timeout: 10_000})
+    const orderLockupPage = new OrderLockupPage(page)
+    
+    await orderLockupPage.searchOrder(order)
 
     await expect(page.locator('#root')).toMatchAriaSnapshot(`
       - img
